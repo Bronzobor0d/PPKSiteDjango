@@ -9,6 +9,8 @@ class Specialty(models.Model):
     form_of_education = models.CharField('Форма обучения', max_length=20)
     education_level = models.CharField('Уровень образования', max_length=20)
     period_of_study = models.CharField('Срок обучения', max_length=20)
+    image_main = models.ImageField('Главная картинка', blank=True, null=True, upload_to='images')
+    image_description = models.ImageField('Картинка в описании', blank=True, null=True, upload_to='images')
 
     def __str__(self):
         return self.title

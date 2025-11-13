@@ -1,0 +1,15 @@
+@font-face {
+  font-family: 'bookmanCTT';
+  src: local('BookmanCTT'),
+       url('../static/fonts/BookmanCTT.ttf') format("truetype");
+}
+
+@font-face {
+  font-family: 'ukAntique';
+  src: local('UkAntique'),
+       url('../static/fonts/UkAntique.ttf') format("truetype");
+}
+
+body {
+    font-family: ukAntique
+}

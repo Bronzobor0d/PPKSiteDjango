@@ -1,0 +1,22 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}{{ specialty.title }}{% endblock %}
+
+{% block content %}
+    <div class="features col-9">
+    <h1 class="p-5">{{ specialty.title }}</h1>
+    <div class="row">
+        <div class="col-8">
+            <h5>Код: {{ specialty.code }}</h5>
+            <h5>Квалификация: {{ specialty.qualification }} </h5>
+            <h5>Форма обучения: {{ specialty.form_of_education }} </h5>
+            <h5>Уровень образования (классов): {{ specialty.education_level }} </h5>
+            <h5>Срок обучения: {{ specialty.period_of_study }} </h5>
+        </div>
+        <div class="col-4">
+            <img src="{{ specialty.image_description.url }}" class="card-img-top">
+        </div>
+    </div>
+    <p>{{ specialty.description|linebreaks }}</p>
+</div>
+{% endblock %}cd
