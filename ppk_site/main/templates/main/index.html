@@ -9,11 +9,13 @@
 <div class="row gx-5">
     {% for spec in specialities %}
 
-    <div class="card col-4 p-3">
-        <img src="{{ spec.image_main.url }}" class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">{{ spec.title }}</h5>
-            <a href="{% url 'specialty-detail' spec.id %}" class="btn btn-primary">Подробнее</a>
+    <div class=" col-4 p-3">
+        <div class="card h-100">
+            <img src="{{ spec.image_main.url }}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{ spec.title }}</h5>
+                <a href="{% url 'specialty-detail' spec.id %}" class="btn btn-primary">Подробнее</a>
+            </div>
         </div>
     </div>
 
