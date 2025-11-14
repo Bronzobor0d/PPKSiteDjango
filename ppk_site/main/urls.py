@@ -5,6 +5,7 @@ from django.conf import settings
 
 urlpatterns = [
     path('', views.index, name='home'),
+    path('specialities', views.specialities, name='specialities'),
     path('<int:pk>', views.SpecialtyDetailView.as_view(), name='specialty-detail')
 ]
 

@@ -5,8 +5,12 @@ from django.views.generic import DetailView
 
 
 def index(request):
-    specialities = Specialty.objects.all()
+    specialities = Specialty.objects.all()[:3]
     return render(request, 'main/index.html', {'title': 'Главная страница', 'specialities': specialities})
+
+def specialities(request):
+    specialities = Specialty.objects.all()
+    return render(request, 'main/specialties.html', {'title': 'Специальности', 'specialities': specialities})
 
 
 class SpecialtyDetailView(DetailView):
