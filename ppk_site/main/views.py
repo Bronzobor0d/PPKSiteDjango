@@ -17,3 +17,4 @@ class SpecialtyDetailView(DetailView):
     model = Specialty
     template_name = 'main/specialty_detail.html'
     context_object_name = 'specialty'
+    extra_context = {'specialities': Specialty.objects.all()}
