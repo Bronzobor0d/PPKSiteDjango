@@ -18,3 +18,22 @@ class Specialty(models.Model):
     class Meta:
         verbose_name = 'Специальность'
         verbose_name_plural = 'Специальности'
+
+class Teacher(models.Model):
+    second_name = models.CharField('Фамилия', max_length=50)
+    first_name = models.CharField('Имя', max_length=50)
+    patronymic = models.CharField('Отчество', max_length=50)
+    position = models.CharField('Должность', max_length=100)
+    teaching_experience = models.IntegerField('Педагогический стаж')
+    qualification_category = models.CharField('Квалификационная категория', max_length=100)
+    professional_education = models.TextField('Профессиональное  образование')
+    professional_development = models.TextField('Сведения о повышении квалификации')
+    awards_and_achievements = models.TextField('Награды и достижения')
+    subjects_and_modules_taught = models.TextField('Преподаваемые дисциплины и модули')
+
+    def __str__(self):
+        return self.second_name + ' ' + self.first_name + ' ' + self.patronymic
+
+    class Meta:
+        verbose_name = 'Преподаватель'
+        verbose_name_plural = 'Преподаватели'
