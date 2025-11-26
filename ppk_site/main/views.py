@@ -4,6 +4,10 @@ from .models import Specialty, Teacher
 from django.views.generic import DetailView
 
 
+def page_not_found(request, exception):
+    return render(request, 'main/404.html', status=404)
+
+
 def index(request):
     specialities = Specialty.objects.all()[:3]
     teachers = Teacher.objects.all()[:3]
