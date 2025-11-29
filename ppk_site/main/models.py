@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime
 
 # Create your models here.
 class Specialty(models.Model):
@@ -11,6 +12,7 @@ class Specialty(models.Model):
     period_of_study = models.CharField('Срок обучения', max_length=20)
     image_main = models.ImageField('Главная картинка', blank=True, null=True, upload_to='images')
     image_description = models.ImageField('Картинка в описании', blank=True, null=True, upload_to='images')
+    lastedit_date = models.DateTimeField()
 
     def __str__(self):
         return self.title
@@ -18,6 +20,7 @@ class Specialty(models.Model):
     class Meta:
         verbose_name = 'Специальность'
         verbose_name_plural = 'Специальности'
+
 
 class Teacher(models.Model):
     second_name = models.CharField('Фамилия', max_length=50)
@@ -30,6 +33,7 @@ class Teacher(models.Model):
     professional_development = models.TextField('Сведения о повышении квалификации')
     awards_and_achievements = models.TextField('Награды и достижения')
     subjects_and_modules_taught = models.TextField('Преподаваемые дисциплины и модули')
+    lastedit_date = models.DateTimeField(default=datetime.now)
 
     def __str__(self):
         return self.second_name + ' ' + self.first_name + ' ' + self.patronymic
