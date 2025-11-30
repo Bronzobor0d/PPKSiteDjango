@@ -13,13 +13,22 @@ def index(request):
     teachers = Teacher.objects.all()[:3]
     return render(request, 'main/index.html', {'title': 'Главная страница', 'specialities': specialities, 'teachers': teachers})
 
+
 def specialities(request):
     specialities = Specialty.objects.all()
     return render(request, 'main/specialties.html', {'title': 'Специальности', 'specialities': specialities})
 
+
 def teachers(request):
     teachers = Teacher.objects.all()
     return render(request, 'main/teachers.html', {'title': 'Преподаватели', 'teachers': teachers})
+
+
+def sitemap(request):
+    teachers = Teacher.objects.all()
+    specialities = Specialty.objects.all()
+    return render(request, 'main/sitemap.html', {'title': 'Карта сайта', 'specialities': specialities, 'teachers': teachers})
+
 
 class SpecialtyDetailView(DetailView):
     model = Specialty

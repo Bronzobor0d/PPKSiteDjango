@@ -8,7 +8,7 @@ from .sitemap import TeacherSitemap
 
 from django.views.static import serve
 
-sitemaps = {'specialty': SpecialtySitemap, 'teacher': TeacherSitemap,}
+sitemaps = {'specialty': SpecialtySitemap, 'teacher': TeacherSitemap}
 
 urlpatterns = [
     re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
@@ -19,6 +19,7 @@ urlpatterns = [
     path('speciality/<int:pk>', views.SpecialtyDetailView.as_view(), name='specialty-detail'),
     path('teachers', views.teachers, name='teachers'),
     path('teacher/<int:pk>', views.TeacherDetailView.as_view(), name='teacher-detail'),
+    path('sitemap', views.sitemap, name='sitemap'),
 
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
          name='django.contrib.sitemaps.views.sitemap')
