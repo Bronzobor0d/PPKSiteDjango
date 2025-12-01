@@ -13,8 +13,8 @@
                     <h5>Должность: {{ teacher.position }}</h5>
                     <h5>Педагогический стаж (лет): {{ teacher.teaching_experience }} </h5>
                     <h5>Квалификационная категория: {{ teacher.qualification_category }} </h5>
-                    <h5>Профессиональное  образование: {{ teacher.professional_education|linebreaks }} </h5>
-                     {% if teacher.professional_development != '-' %}
+                    <h5>Профессиональное образование: {{ teacher.professional_education|linebreaks }} </h5>
+                    {% if teacher.professional_development != '-' %}
                     <h5>Сведения о повышении квалификации: {{ teacher.professional_development|linebreaks }} </h5>
                     {% endif %}
                     {% if teacher.awards_and_achievements != '-' %}
@@ -31,12 +31,13 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     {% for teach in teachers %}
                     <li class="nav-item">
-                        <a class="nav-link {% if teacher.id == teach.id %}fw-bold{% endif %}" href="{% url 'teacher-detail' teach.id %}">{{ teach }}</a>
+                        <a class="nav-link {% if teacher.id == teach.id %}fw-bold{% endif %}"
+                           href="{% url 'teacher-detail' teach.id %}">{{ teach }}</a>
                     </li>
                     {% endfor %}
                 </ul>
             </div>
-
+            {% include 'main/banner.html' %}
         </div>
 
     </div>

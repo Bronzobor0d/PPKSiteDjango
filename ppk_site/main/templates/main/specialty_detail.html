@@ -29,11 +29,14 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     {% for spec in specialities %}
                     <li class="nav-item">
-                        <a class="nav-link {% if specialty.id == spec.id %}fw-bold{% endif %}" href="{% url 'specialty-detail' spec.id %}">{{ spec.code }} {{ spec.title }}</a>
+                        <a class="nav-link {% if specialty.id == spec.id %}fw-bold{% endif %}"
+                           href="{% url 'specialty-detail' spec.id %}">{{ spec.code }} {{ spec.title }}</a>
                     </li>
                     {% endfor %}
                 </ul>
             </div>
+
+            {% include 'main/banner.html' %}
 
         </div>
 

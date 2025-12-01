@@ -18,7 +18,7 @@
 </div>
 <div class="row justify-content-center p-3">
     <div class="col-md-auto">
-        <img src="/media/static_images/Logo.png" class="card-img-top" alt="...">
+        <img src="/media/static_images/Logo.png" class="card-img-top"  alt="...">
     </div>
 </div>
 
@@ -45,13 +45,20 @@
     {% endfor %}
 
 </div>
+
 <div class="row justify-content-center">
     <div class="col-md-auto">
         <a href="{% url 'specialities'%}" class="btn btn-primary bg-main-ppk mt-3 fs-4">Все специальности</a>
     </div>
 </div>
 
-<div class="row justify-content-center pt-5">
+<div class="row justify-content-center p-3">
+    <div class="col-md-auto">
+        {% include 'main/banner.html' %}
+    </div>
+</div>
+
+<div class="row justify-content-center">
     <div class="col-md-auto">
         <h2>Наши преподаватели</h2>
     </div>
