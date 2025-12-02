@@ -4,6 +4,20 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Specialty, Teacher
 from django.views.generic import DetailView
+from django.shortcuts import redirect
+from django.conf import settings
+
+
+def set_theme(request):
+    if request.method == 'POST':
+        theme = request.POST.get('theme', settings.DEFAULT_THEME)
+
+        if theme in settings.THEMES:
+            request.session['theme'] = theme
+            request.session.modified = True
+
+    referer = request.META.get('HTTP_REFERER', '/')
+    return redirect(referer)
 
 
 def page_not_found(request, exception):

@@ -53,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'main.middleware.ThemeMiddleware'
 ]
 
 ROOT_URLCONF = 'ppk_site.urls'
@@ -67,6 +68,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'main.context_processors.theme_context'
             ],
         },
     },
@@ -129,3 +131,16 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+THEMES = {
+    'default': {
+        'id': 1,
+        'name': 'Обычная'
+    },
+    'visually_impaired': {
+        'id': 2,
+        'name': 'Для слабовидящих'
+    }
+}
+
+DEFAULT_THEME = 'default'

@@ -21,6 +21,7 @@ urlpatterns = [
     path('teacher/<int:pk>', views.TeacherDetailView.as_view(), name='teacher-detail'),
     path('sitemap', views.sitemap, name='sitemap'),
 
-    path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
-         name='django.contrib.sitemaps.views.sitemap')
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
+
+    path('set-theme/', views.set_theme, name='set_theme')
 ]
