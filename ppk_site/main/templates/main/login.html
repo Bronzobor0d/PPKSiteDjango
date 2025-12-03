@@ -1,0 +1,16 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+
+<form action="{% url 'login' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-primary bg-main-ppk" type="submit">Войти</button>
+    <a class="btn btn-primary bg-main-ppk" href="{% url 'signup' %}">Зарегестрироваться</a>
+</form>
+
+{% endblock %}

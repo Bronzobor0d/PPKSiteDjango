@@ -23,5 +23,11 @@ urlpatterns = [
 
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
 
-    path('set-theme/', views.set_theme, name='set_theme')
+    path('set-theme/', views.set_theme, name='set_theme'),
+
+    path('signup/', views.signup_view, name='signup'),
+    path('login/', views.login_view, name='login'),
+    path('logout/', views.logout_view, name='logout'),
+
+    path('chats/', views.chats, name='chats'),
 ]

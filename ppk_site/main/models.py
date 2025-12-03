@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import datetime
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Specialty(models.Model):
@@ -41,3 +42,30 @@ class Teacher(models.Model):
     class Meta:
         verbose_name = 'Преподаватель'
         verbose_name_plural = 'Преподаватели'
+
+
+class Chat(models.Model):
+    user_owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_owner', verbose_name='Владелец')
+    user_participant= models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_participant',verbose_name='Участник')
+    create_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return 'Чат ' + self.user1.username + ' и ' + self.user2.username
+
+    class Meta:
+        verbose_name = 'Чат'
+        verbose_name_plural = 'Чаты'
+
+
+class Message(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь')
+    chat = models.ForeignKey(Chat, on_delete=models.CASCADE, verbose_name='Чат')
+    message = models.TextField('Сообщение')
+    date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.message
+
+    class Meta:
+        verbose_name = 'Сообщение'
+        verbose_name_plural = 'Сообщения'
