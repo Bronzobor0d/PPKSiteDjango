@@ -10,6 +10,7 @@ from django.conf import settings
 from .forms import SignUpForm, LoginForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
+from django.db.models import Exists, OuterRef
 
 
 def set_theme(request):
@@ -61,49 +62,58 @@ def logout_view(request):
 def index(request):
     specialities = Specialty.objects.all()[:3]
     teachers = Teacher.objects.all()[:3]
-    return render(request, 'main/index.html', {'title': 'Главная страница', 'specialities': specialities, 'teachers': teachers, 'banners': ['1','2','3']})
+    return render(request, 'main/index.html',
+                  {'title': 'Главная страница', 'specialities': specialities, 'teachers': teachers,
+                   'banners': ['1', '2', '3']})
 
 
 def specialities(request):
     specialities = Specialty.objects.all()
 
-    return render(request, 'main/specialties.html', {'title': 'Специальности', 'specialities': specialities, 'banners': ['1','2','3']})
+    return render(request, 'main/specialties.html',
+                  {'title': 'Специальности', 'specialities': specialities, 'banners': ['1', '2', '3']})
 
 
 def teachers(request):
     teachers = Teacher.objects.all()
-    return render(request, 'main/teachers.html', {'title': 'Преподаватели', 'teachers': teachers, 'banners': ['1','2','3']})
+    return render(request, 'main/teachers.html',
+                  {'title': 'Преподаватели', 'teachers': teachers, 'banners': ['1', '2', '3']})
 
 
 def sitemap(request):
     teachers = Teacher.objects.all()
     specialities = Specialty.objects.all()
-    return render(request, 'main/sitemap.html', {'title': 'Карта сайта', 'specialities': specialities, 'teachers': teachers})
+    return render(request, 'main/sitemap.html',
+                  {'title': 'Карта сайта', 'specialities': specialities, 'teachers': teachers})
 
 
 def chats(request):
-    users = User.objects.filter(is_staff=True)
     chats = Chat.objects.filter(
         Q(user_owner=request.user) |
         Q(user_participant=request.user))
+    users_without_chats = User.objects.annotate(
+        has_chat=Exists(Chat.objects.filter(Q(user_owner=OuterRef('pk')) & Q(user_participant=OuterRef('pk')) ))
+    ).filter(Q(has_chat=False) & Q(is_staff=True) ^ Q(id=request.user.id))
 
-    return render(request, 'main/chats.html', {'title': 'Преподаватели', 'users': users, 'banners': ['1','2','3']})
+    return render(request, 'main/chats.html', {'title': 'Тех-поддержка', 'users': users_without_chats, 'chats' : chats,'banners': ['1', '2', '3']})
 
 
 class SpecialtyDetailView(DetailView):
     model = Specialty
     template_name = 'main/specialty_detail.html'
     context_object_name = 'specialty'
-    extra_context = {'specialities': Specialty.objects.all(), 'banners': ['1','2','3']}
+    extra_context = {'specialities': Specialty.objects.all(), 'banners': ['1', '2', '3']}
+
 
 class TeacherDetailView(DetailView):
     model = Teacher
     template_name = 'main/teacher_detail.html'
     context_object_name = 'teacher'
-    extra_context = {'teachers': Teacher.objects.all(), 'banners': ['1','2','3']}
+    extra_context = {'teachers': Teacher.objects.all(), 'banners': ['1', '2', '3']}
+
 
 class ChatDetailView(DetailView):
     model = User
     template_name = 'main/teacher_detail.html'
     context_object_name = 'teacher'
-    extra_context = {'teachers': Teacher.objects.all(), 'banners': ['1','2','3']}
+    extra_context = {'teachers': Teacher.objects.all(), 'banners': ['1', '2', '3']}
