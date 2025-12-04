@@ -30,4 +30,6 @@ urlpatterns = [
     path('logout/', views.logout_view, name='logout'),
 
     path('chats/', views.chats, name='chats'),
+    path('chat/<int:pk>', views.ChatDetailView.as_view(), name='chat-detail'),
+    path('create-chat/', views.create_chat, name='create_chat'),
 ]

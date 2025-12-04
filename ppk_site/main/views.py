@@ -1,16 +1,18 @@
 import random
 
-from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
-from .models import Specialty, Teacher, Chat
+from .models import Specialty, Teacher, Chat, Message
 from django.db.models import Q
 from django.views.generic import DetailView
 from django.shortcuts import redirect
 from django.conf import settings
-from .forms import SignUpForm, LoginForm
+from .forms import SignUpForm, LoginForm, ChatCreateForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
-from django.db.models import Exists, OuterRef
+from django.db import IntegrityError
+from django.contrib import messages
 
 
 def set_theme(request):
@@ -86,16 +88,70 @@ def sitemap(request):
     return render(request, 'main/sitemap.html',
                   {'title': 'Карта сайта', 'specialities': specialities, 'teachers': teachers})
 
-
+@login_required
 def chats(request):
-    chats = Chat.objects.filter(
-        Q(user_owner=request.user) |
-        Q(user_participant=request.user))
-    users_without_chats = User.objects.annotate(
-        has_chat=Exists(Chat.objects.filter(Q(user_owner=OuterRef('pk')) & Q(user_participant=OuterRef('pk')) ))
-    ).filter(Q(has_chat=False) & Q(is_staff=True) ^ Q(id=request.user.id))
+    # chats = Chat.objects.filter(
+    #     Q(user_owner=request.user) |
+    #     Q(user_participant=request.user))
+    # users_without_chats = User.objects.annotate(
+    #     has_chat=Exists(Chat.objects.filter(Q(user_owner=OuterRef('pk')) & Q(user_participant=OuterRef('pk')) ))
+    # ).filter(Q(has_chat=False) & Q(is_staff=True) ^ Q(id=request.user.id))
 
-    return render(request, 'main/chats.html', {'title': 'Тех-поддержка', 'users': users_without_chats, 'chats' : chats,'banners': ['1', '2', '3']})
+    if request.user.is_staff:
+        users = User.objects.exclude(Q(id=request.user.id))
+    else:
+        users = User.objects.exclude(Q(id=request.user.id) | Q(is_staff=False))
+
+    user_forms = []
+    for user in users:
+        chat_exists = Chat.objects.filter(
+            user_owner=request.user,
+            user_participant=user
+        ).exists() or Chat.objects.filter(
+            user_owner=user,
+            user_participant=request.user
+        ).exists()
+
+        user_forms.append({
+            'user': user,
+            'form': ChatCreateForm(initial={'user_owner_id': user.id}),
+            'chat_exists': chat_exists
+        })
+
+    context ={
+        'title': 'Тех-поддержка',
+        'user_forms': user_forms,
+        'banners': ['1', '2', '3']
+    }
+
+    return render(request, 'main/chats.html', context)
+
+@login_required
+def create_chat(request):
+    if request.method == 'POST':
+        form = ChatCreateForm(request.POST)
+        if form.is_valid():
+            user_owner_id = form.cleaned_data['user_owner_id']
+            try:
+                user_owner = get_object_or_404(User, id=user_owner_id)
+
+                if Chat.objects.filter(user_owner=user_owner, user_participant=request.user).exists() or Chat.objects.filter(user_owner=request.user, user_participant=user_owner).exists():
+                    messages.warning(request, 'Чат с этим пользователем уже существует')
+                else:
+                    chat = Chat.objects.create(
+                        user_owner=user_owner,
+                        user_participant=request.user
+                    )
+                    messages.success(request, f'Чат с {user_owner.username} создан')
+
+                    return redirect('chat-detail', chat_id=chat.id)
+
+            except IntegrityError:
+                messages.error(request, 'Ошибка при создании чата')
+            except User.DoesNotExist:
+                messages.error(request, 'Пользователь не найден')
+
+    return redirect('chats')
 
 
 class SpecialtyDetailView(DetailView):
@@ -114,6 +170,6 @@ class TeacherDetailView(DetailView):
 
 class ChatDetailView(DetailView):
     model = User
-    template_name = 'main/teacher_detail.html'
-    context_object_name = 'teacher'
-    extra_context = {'teachers': Teacher.objects.all(), 'banners': ['1', '2', '3']}
+    template_name = 'main/chat_detail.html'
+    context_object_name = 'chat'
+    extra_context = {'messages': Message.objects.all(), 'banners': ['1', '2', '3']}

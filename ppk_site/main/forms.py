@@ -18,6 +18,9 @@ class LoginForm(AuthenticationForm):
     password = forms.CharField(label='Пароль', widget=forms.PasswordInput)
 
 
-class ChatForm(ModelForm):
+class ChatCreateForm(ModelForm):
+    user_owner_id = forms.IntegerField(widget=forms.HiddenInput())
+
     class Meta:
         model = Chat
+        fields = ['user_owner_id']
