@@ -50,7 +50,7 @@ class Chat(models.Model):
     create_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return 'Чат ' + self.user1.username + ' и ' + self.user2.username
+        return 'Чат ' + self.user_owner.username + ' и ' + self.user_participant.username
 
     class Meta:
         verbose_name = 'Чат'

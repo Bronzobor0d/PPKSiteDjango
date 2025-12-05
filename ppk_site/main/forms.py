@@ -2,7 +2,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django import forms
 from django.forms import ModelForm
-from .models import Chat
+from .models import Chat, Message
 
 
 class SignUpForm(UserCreationForm):
@@ -24,3 +24,19 @@ class ChatCreateForm(ModelForm):
     class Meta:
         model = Chat
         fields = ['user_owner_id']
+
+
+class MessageCreateForm(ModelForm):
+    chat_id = forms.IntegerField(widget=forms.HiddenInput())
+
+    class Meta:
+        model = Message
+        fields = ['message', 'chat_id']
+
+        widgets = {
+            "message": forms.TextInput(attrs = {
+                'class': 'form-control',
+                'placeholder' : 'Сообщение...'
+            }
+            )
+        }

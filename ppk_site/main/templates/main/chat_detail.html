@@ -1,1 +1,51 @@
-{{ chat_id }}
+{% extends 'main/layout.html' %}
+{% load tz %}
+
+{% block title %}Чат {{ chat.user_owner.username }} и {{ chat.user_participant.username }}{% endblock %}
+
+{% block content %}
+
+<div class="features">
+    <div class="row">
+        <div class="col-sm-9 ">
+            <h1 class="p-5">
+                Чат с
+                {% if chat.user_owner == request.user %}
+                {{ chat.user_participant.username }}
+                {% else %}
+                {{ chat.user_owner.username }}
+                {% endif %}
+            </h1>
+            <div class="row">
+                <div class="col-sm-12">
+
+                    {% for message in messages %}
+
+                    <div class="card m-3">
+                        <div class="card-body d-flex {% if message.user == request.user %} align-items-end {% else %} align-items-start {% endif %} flex-column">
+                            <h5>{{ message.message }}</h5>
+                            <p>{{ message.date|localtime }}</p>
+                        </div>
+                    </div>
+
+                    {% endfor %}
+                    <form method="post" action="{% url 'create_message' %}">
+                            {% csrf_token %}
+                            {{ form.message }}
+                            <input type="hidden" name="chat_url" value="{% url 'chat-detail' pk=chat.id %}">
+                            <input type="hidden" name="chat_id" value="{{ chat.id }}">
+                            <button class="btn btn-primary bg-main-ppk mt-3" type="submit">Отправить</button>
+                        </form>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-sm-3">
+            {% include 'main/banner.html' %}
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

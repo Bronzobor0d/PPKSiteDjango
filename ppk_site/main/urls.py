@@ -32,4 +32,5 @@ urlpatterns = [
     path('chats/', views.chats, name='chats'),
     path('chat/<int:pk>', views.ChatDetailView.as_view(), name='chat-detail'),
     path('create-chat/', views.create_chat, name='create_chat'),
+    path('create-message/', views.create_message, name='create_message'),
 ]
