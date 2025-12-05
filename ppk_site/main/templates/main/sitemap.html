@@ -16,9 +16,9 @@
     </div>
 </div>
 <div class="row justify-content-center pt-4">
-    <div class="col-md-6 text-center">
+    <div class="col-md-4 text-center">
         <a href="{% url 'specialities' %}" class="btn btn-primary bg-main-ppk mt-3 fs-3">Специальности</a>
-        <div class="pt-5">
+        <div class="pt-4">
             {% for spec in specialities %}
 
             <div class="col-sm-12 p-2">
@@ -30,7 +30,13 @@
         </div>
 
     </div>
-    <div class="col-md-6 text-center">
+    <div class="col-md-2">
+        <a href="{% url 'news' %}" class="btn btn-primary bg-main-ppk mt-3 fs-3">Новости</a>
+    </div>
+     <div class="col-md-2">
+        <a href="{% url 'chats' %}" class="btn btn-primary bg-main-ppk mt-3 fs-3">Техническая поддержка</a>
+    </div>
+    <div class="col-md-4 text-center">
         <a href="{% url 'teachers' %}" class="btn btn-primary bg-main-ppk mt-3 fs-3">Преподаватели</a>
         <div class="pt-5">
         {% for teacher in teachers %}

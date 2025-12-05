@@ -2,7 +2,7 @@ from django.db import models
 from datetime import datetime
 from django.contrib.auth.models import User
 
-# Create your models here.
+
 class Specialty(models.Model):
     title = models.CharField('Название', max_length=100)
     code = models.CharField('Код', max_length=20)
@@ -69,3 +69,17 @@ class Message(models.Model):
     class Meta:
         verbose_name = 'Сообщение'
         verbose_name_plural = 'Сообщения'
+
+
+class News(models.Model):
+    title = models.CharField('Заголовок', max_length=100)
+    text = models.TextField('Текст')
+    image = models.ImageField('Картинка', blank=True, null=True, upload_to='images')
+    date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'Новость'
+        verbose_name_plural = 'Новости'

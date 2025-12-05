@@ -3,7 +3,7 @@ import random
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
-from .models import Specialty, Teacher, Chat, Message
+from .models import Specialty, Teacher, Chat, Message, News
 from django.db.models import Q
 from django.views.generic import DetailView
 from django.shortcuts import redirect
@@ -64,8 +64,9 @@ def logout_view(request):
 def index(request):
     specialities = Specialty.objects.all()[:3]
     teachers = Teacher.objects.all()[:3]
+    news = News.objects.all()[:3]
     return render(request, 'main/index.html',
-                  {'title': 'Главная страница', 'specialities': specialities, 'teachers': teachers,
+                  {'title': 'Главная страница', 'specialities': specialities, 'teachers': teachers, 'news': news,
                    'banners': ['1', '2', '3']})
 
 
@@ -170,6 +171,13 @@ def create_message(request):
             return redirect('chat-detail', pk=form.cleaned_data['chat_id'])
 
     return redirect('chats')
+
+
+def news(request):
+    news = News.objects.all()
+    return render(request, 'main/news.html',
+                  {'title': 'Новости', 'news': news, 'banners': ['1', '2', '3']})
+
 
 
 class SpecialtyDetailView(DetailView):
