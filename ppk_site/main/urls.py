@@ -23,16 +23,17 @@ urlpatterns = [
 
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
 
-    path('set-theme/', views.set_theme, name='set_theme'),
+    path('set-theme', views.set_theme, name='set_theme'),
 
-    path('signup/', views.signup_view, name='signup'),
-    path('login/', views.login_view, name='login'),
-    path('logout/', views.logout_view, name='logout'),
+    path('signup', views.signup_view, name='signup'),
+    path('login', views.login_view, name='login'),
+    path('logout', views.logout_view, name='logout'),
 
-    path('chats/', views.chats, name='chats'),
+    path('chats', views.chats, name='chats'),
     path('chat/<int:pk>', views.ChatDetailView.as_view(), name='chat-detail'),
-    path('create-chat/', views.create_chat, name='create_chat'),
-    path('create-message/', views.create_message, name='create_message'),
+    path('create-chat', views.create_chat, name='create_chat'),
+    path('create-message', views.create_message, name='create_message'),
 
     path('news', views.news, name='news'),
+    path('search', views.search, name='search'),
 ]

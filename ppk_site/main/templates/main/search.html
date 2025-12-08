@@ -1,0 +1,94 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="row justify-content-center pt-4">
+            <div class="col-md-auto">
+                <h1>Поиск</h1>
+            </div>
+        </div>
+
+        <div class="row p-3">
+            <form class="d-flex" method="get" action="{% url 'search' %}">
+                <input class="form-control me-2" type="search" name="search" placeholder="Поиск по сайту"
+                       aria-label="Search" value="{{ search }}">
+                <button class="btn btn-outline-ppk" type="submit">Искать</button>
+            </form>
+        </div>
+
+        {% if news|length > 0 %}
+
+        <div class="row pt-3">
+            <div class="col-md-auto">
+                <h3>Новости</h3>
+            </div>
+        </div>
+        <div class="row">
+
+            {% for new in news %}
+
+            <div class="col-sm-12">
+                <a href="{% url 'news' %}" class="btn fs-5">{{ new.title }}</a>
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% endif %}
+
+        {% if specialities|length > 0 %}
+
+        <div class="row pt-3">
+            <div class="col-md-auto">
+                <h3>Специальности</h3>
+            </div>
+        </div>
+        <div class="row">
+
+            {% for spec in specialities %}
+
+            <div class="col-sm-12">
+                <a href="{% url 'specialty-detail' spec.id %}" class="btn  fs-5">{{ spec.title }}</a>
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% endif %}
+
+        {% if teachers|length > 0 %}
+
+        <div class="row pt-3">
+            <div class="col-md-auto">
+                <h3>Преподаватель</h3>
+            </div>
+        </div>
+        <div class="row">
+
+            {% for teacher in teachers %}
+
+            <div class="col-sm-12">
+                <a href="{% url 'teacher-detail' teacher.id %}" class="btn fs-5">{{ teacher }}</a>
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+
+{% endblock %}

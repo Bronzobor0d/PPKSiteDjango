@@ -3,6 +3,8 @@ import random
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
+from django.template.defaultfilters import title
+
 from .models import Specialty, Teacher, Chat, Message, News
 from django.db.models import Q
 from django.views.generic import DetailView
@@ -72,9 +74,10 @@ def index(request):
 
 def specialities(request):
     specialities = Specialty.objects.all()
+    news = News.objects.all()
 
     return render(request, 'main/specialties.html',
-                  {'title': 'Специальности', 'specialities': specialities, 'banners': ['1', '2', '3']})
+                  {'title': 'Специальности', 'specialities': specialities, 'news':news,'banners': ['1', '2', '3']})
 
 
 def teachers(request):
@@ -88,6 +91,34 @@ def sitemap(request):
     specialities = Specialty.objects.all()
     return render(request, 'main/sitemap.html',
                   {'title': 'Карта сайта', 'specialities': specialities, 'teachers': teachers})
+
+
+def search(request):
+    search_query = request.GET.get('search', None)
+    news = None
+    specialities = None
+    teachers = None
+    if search_query:
+        news = News.objects.filter(Q(title__icontains=search_query) | Q(text__icontains=search_query))
+        specialities = Specialty.objects.filter(
+            Q(title__icontains=search_query)
+            | Q(code__icontains=search_query)
+            | Q(qualification__icontains=search_query)
+            | Q(description__icontains=search_query)
+            | Q(form_of_education__icontains=search_query)
+            | Q(education_level__icontains=search_query))
+        teachers = Teacher.objects.filter(
+            Q(second_name__icontains=search_query)
+            | Q(first_name__icontains=search_query)
+            | Q(patronymic__icontains=search_query)
+            | Q(position__icontains=search_query)
+            | Q(qualification_category__icontains=search_query)
+            | Q(professional_education__icontains=search_query)
+            | Q(professional_development__icontains=search_query)
+            | Q(awards_and_achievements__icontains=search_query)
+            | Q(subjects_and_modules_taught__icontains=search_query))
+
+    return render(request, 'main/search.html', {'title': 'Поиск', 'news':news,'specialities':specialities, 'teachers': teachers, 'search': search_query })
 
 
 @login_required

@@ -45,32 +45,6 @@
 
             {% endfor %}
         </div>
-        {% if chats|length != 0 %}
-        <div class="row justify-content-center">
-            <div class="col-md-auto">
-                <h3>Активные чаты</h3>
-            </div>
-        </div>
-
-        {% endif %}
-         <div class="row">
-            {% for chat in chats %}
-
-            <div class="col-sm-4 p-3">
-                <div class="card h-100">
-                    <div class="card-body d-flex align-items-start flex-column">
-                        <form method="post">
-                            {% csrf_token %}
-                            {{ form.user_owner }}
-                            <h5 class="card-title mb-auto">{{ chat.user_owner.username }}</h5>
-                            <button class="btn btn-primary bg-main-ppk mt-3" type="submit"></button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-            {% endfor %}
-        </div>
     </div>
     <div class="col-sm-3">
         {% include 'main/banner.html' %}

@@ -10,7 +10,7 @@
     --letter-spacing-min: 0.12em;
 }
 
-.accessibility-mode {
+.visually_impaired-mode {
     color: #000000 !important;
     background-color: #FFFFFF !important;
 
@@ -21,11 +21,11 @@
     font-weight: 400 !important;
 }
 
-.accessibility-mode img {
+.visually_impaired-mode img {
     filter: grayscale(100%)
 }
 
-.accessibility-mode h1 {
+.visually_impaired-mode h1 {
     font-size: 2.5em !important;
     font-weight: 700 !important;
     margin-bottom: 1.5em !important;
@@ -33,7 +33,7 @@
     text-shadow: none !important;
 }
 
-.accessibility-mode h2 {
+.visually_impaired-mode h2 {
     font-size: 2em !important;
     font-weight: 700 !important;
     margin: 1.5em 0 1em 0 !important;
@@ -41,13 +41,13 @@
     padding-bottom: 0.5em !important;
 }
 
-.accessibility-mode h3 {
+.visually_impaired-mode h3 {
     font-size: 1.75em !important;
     font-weight: 600 !important;
     margin: 1.2em 0 0.8em 0 !important;
 }
 
-.accessibility-mode p {
+.visually_impaired-mode p {
     font-size: 1.25em !important;
     line-height: 1.8 !important;
     margin-bottom: 1.5em !important;
@@ -55,15 +55,15 @@
     max-width: 70ch !important;
 }
 
-.accessibility-mode a {
+.visually_impaired-mode a {
     color: #0000EE !important;
     text-decoration: underline !important;
     border-bottom: 2px solid #0000EE !important;
     font-weight: 600 !important;
 }
 
-.accessibility-mode a:hover,
-.accessibility-mode a:focus {
+.visually_impaired-mode a:hover,
+.visually_impaired-mode a:focus {
     background-color: #FFFF00 !important;
     color: #000000 !important;
     outline: 3px solid #000000 !important;
@@ -72,7 +72,7 @@
     text-shadow: none !important;
 }
 
-.accessibility-mode {
+.visually_impaired-mode {
     --primary-color: #000000;
     --secondary-color: #FFFFFF;
     --accent-color: #FF0000;
@@ -80,18 +80,18 @@
     --visited-color: #551A8B;
 }
 
-.accessibility-mode .card,
-.accessibility-mode .box,
-.accessibility-mode .panel {
+.visually_impaired-mode .card,
+.visually_impaired-mode .box,
+.visually_impaired-mode .panel {
     background-color: #FFFFFF !important;
     border: 3px solid #000000 !important;
     color: #000000 !important;
 }
 
-.accessibility-mode .btn,
-.accessibility-mode button,
-.accessibility-mode input[type="submit"],
-.accessibility-mode input[type="button"] {
+.visually_impaired-mode .btn,
+.visually_impaired-mode button,
+.visually_impaired-mode input[type="submit"],
+.visually_impaired-mode input[type="button"] {
     background-color: #000000 !important;
     color: #FFFFFF !important;
     border: 3px solid #000000 !important;
@@ -101,15 +101,15 @@
     font-weight: 600 !important;
 }
 
-.accessibility-mode .btn:hover,
-.accessibility-mode button:hover {
+.visually_impaired-mode .btn:hover,
+.visually_impaired-mode button:hover {
     background-color: #333333 !important;
     border-color: #333333 !important;
 }
 
-.accessibility-mode input,
-.accessibility-mode textarea,
-.accessibility-mode select {
+.visually_impaired-mode input,
+.visually_impaired-mode textarea,
+.visually_impaired-mode select {
     background-color: #FFFFFF !important;
     border: 3px solid #000000 !important;
     color: #000000 !important;
@@ -118,21 +118,21 @@
     min-height: 50px !important;
 }
 
-.accessibility-mode label {
+.visually_impaired-mode label {
     font-size: 1.3em !important;
     font-weight: 600 !important;
     margin-bottom: 10px !important;
     display: block !important;
 }
 
-.accessibility-mode .navbar,
-.accessibility-mode .main-menu {
+.visually_impaired-mode .navbar,
+.visually_impaired-mode .main-menu {
     background-color: #000000 !important;
     color: #FFFFFF !important;
     padding: 20px !important;
 }
 
-.accessibility-mode .nav-link {
+.visually_impaired-mode .nav-link {
     color: #FFFFFF !important;
     font-size: 1.3em !important;
     padding: 15px 25px !important;
@@ -141,34 +141,34 @@
     background-color: #000000 !important;
 }
 
-.accessibility-mode .nav-link:hover,
-.accessibility-mode .nav-link:focus {
+.visually_impaired-mode .nav-link:hover,
+.visually_impaired-mode .nav-link:focus {
     background-color: #FFFFFF !important;
     color: #000000 !important;
 }
 
-.accessibility-mode .breadcrumb {
+.visually_impaired-mode .breadcrumb {
     font-size: 1.2em !important;
     padding: 15px !important;
     background-color: #F0F0F0 !important;
     border: 2px solid #000000 !important;
 }
 
-.accessibility-mode .breadcrumb-item + .breadcrumb-item::before {
+.visually_impaired-mode .breadcrumb-item + .breadcrumb-item::before {
     content: "→" !important;
     font-size: 1.5em !important;
     color: #000000 !important;
     padding: 0 10px !important;
 }
 
-.accessibility-mode table {
+.visually_impaired-mode table {
     border: 3px solid #000000 !important;
     border-collapse: separate !important;
     border-spacing: 0 !important;
     font-size: 1.2em !important;
 }
 
-.accessibility-mode th {
+.visually_impaired-mode th {
     background-color: #000000 !important;
     color: #FFFFFF !important;
     padding: 20px !important;
@@ -177,33 +177,33 @@
     text-align: left !important;
 }
 
-.accessibility-mode td {
+.visually_impaired-mode td {
     padding: 15px !important;
     border: 2px solid #000000 !important;
     background-color: #FFFFFF !important;
     color: #000000 !important;
 }
 
-.accessibility-mode tr:nth-child(even) td {
+.visually_impaired-mode tr:nth-child(even) td {
     background-color: #F0F0F0 !important;
 }
 
-.accessibility-mode *:focus {
+.visually_impaired-mode *:focus {
     outline: 3px solid #FF0000 !important;
     outline-offset: 3px !important;
     background-color: #FFFF00 !important;
     color: #000000 !important;
 }
 
-.accessibility-mode img {
+.visually_impaired-mode img {
     border: 3px solid #000000 !important;
 }
 
-.accessibility-mode img[alt] {
+.visually_impaired-mode img[alt] {
     position: relative;
 }
 
-.accessibility-mode img[alt]::after {
+.visually_impaired-mode img[alt]::after {
     content: "Альт: " attr(alt);
     display: block;
     font-size: 1.1em;
@@ -213,29 +213,29 @@
     border: 1px solid #000000;
 }
 
-.accessibility-mode ul,
-.accessibility-mode ol {
+.visually_impaired-mode ul,
+.visually_impaired-mode ol {
     font-size: 1.2em !important;
     line-height: 1.8 !important;
     padding-left: 2em !important;
 }
 
-.accessibility-mode li {
+.visually_impaired-mode li {
     margin-bottom: 1em !important;
     padding-left: 10px !important;
 }
 
-.accessibility-mode ul li::marker {
+.visually_impaired-mode ul li::marker {
     color: #000000 !important;
     font-size: 1.5em !important;
 }
 
-.accessibility-mode .decorative,
-.accessibility-mode .bg-image {
+.visually_impaired-mode .decorative,
+.visually_impaired-mode .bg-image {
     display: none !important;
 }
 
-.accessibility-mode .important {
+.visually_impaired-mode .important {
     background-color: #FFFF00 !important;
     border: 3px solid #FF0000 !important;
     padding: 20px !important;
@@ -243,25 +243,25 @@
     color: #000000 !important;
 }
 
-.accessibility-mode .highlight {
+.visually_impaired-mode .highlight {
     background-color: #FFFF00 !important;
     color: #000000 !important;
     padding: 3px !important;
     font-weight: 600 !important;
 }
 
-.accessibility-mode .clickable {
+.visually_impaired-mode .clickable {
     min-height: 44px !important;
     min-width: 44px !important;
     padding: 15px !important;
 }
 
 @media (max-width: 768px) {
-    .accessibility-mode {
+    .visually_impaired-mode {
         font-size: 18px !important;
     }
 
-    .accessibility-mode .container {
+    .visually_impaired-mode .container {
         width: 100% !important;
         max-width: 100% !important;
         padding: 10px !important;
@@ -269,13 +269,13 @@
 }
 
 @media print {
-    .accessibility-mode {
+    .visually_impaired-mode {
         color: #000000 !important;
         background: #FFFFFF !important;
         font-size: 14pt !important;
     }
 
-    .accessibility-mode a {
+    .visually_impaired-mode a {
         color: #000000 !important;
         text-decoration: underline !important;
     }
