@@ -152,7 +152,7 @@ def chats(request):
         })
 
     context = {
-        'title': 'Тех-поддержка',
+        'title': 'Техподдержка',
         'user_forms': user_forms,
         'banners': ['1', '2', '3']
     }
