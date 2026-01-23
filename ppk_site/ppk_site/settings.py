@@ -145,3 +145,18 @@ THEMES = {
 }
 
 DEFAULT_THEME = 'default'
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://ppksite.onrender.com',
+    'https://*.onrender.com',
+]
+
+# Если используете куки для CSRF
+CSRF_USE_SESSIONS = False
+CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_SAMESITE = 'None'  # Если фронтенд на другом домене
+CSRF_COOKIE_HTTPONLY = False   # Для доступа JavaScript
+
+# Настройки сессий
+SESSION_COOKIE_SECURE = True
+SESSION_COOKIE_SAMESITE = 'None'
